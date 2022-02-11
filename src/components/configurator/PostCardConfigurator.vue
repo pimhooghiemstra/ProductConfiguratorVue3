@@ -1,8 +1,14 @@
 <script setup>
+import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18nStore } from '../../stores/i18n';
 const i18nStore = useI18nStore()
 const { lang } = storeToRefs(i18nStore)
+import CardChooseHeadlineVue from './product/CardChooseHeadline.vue';
+const inputValue = ref('Hallo mijn lieve Pannie Koek.')
+const updateValue = (text) => {
+    inputValue.value = text
+}
 </script>
 
 <template>
@@ -25,6 +31,8 @@ const { lang } = storeToRefs(i18nStore)
 
                 <b>{{ lang['introduction2'] }}</b>
             </div>
+
+            <CardChooseHeadlineVue :value="inputValue" @inputchanged="updateValue"/>
 
 <!--
             <ProductList 

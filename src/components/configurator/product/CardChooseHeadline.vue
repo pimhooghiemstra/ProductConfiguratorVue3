@@ -1,26 +1,21 @@
+<script setup>
+import { storeToRefs } from 'pinia'
+import { useI18nStore } from '../../../stores/i18n';
+const i18nStore = useI18nStore()
+const { lang } = storeToRefs(i18nStore)
+const emit = defineEmits(['inputchanged'])
+const props = defineProps({
+    value: String
+})
+const updateParent = (e) => emit('inputchanged', e.target.value)
+</script>
+
 <template>
     <div class="form-group">
         <label for="headline">{{ lang['product']['headline'] }}</label>
-        <input id="headline" class="form-control" type="text" :placeholder="lang['product']['headlinePlaceholder']" :value="value" @input="updateParent">
+        <input id="headline" class="form-control" type="text" 
+            :placeholder="lang['product']['headlinePlaceholder']" 
+            :value="props.value" 
+            @input="updateParent">
     </div>
 </template>
-
-<script>
-// import { mapGetters } from 'vuex'
-export default {
-    name: 'CardChooseHeadline',
-    props: ['value'],
-    computed: {
-        ...mapGetters('i18n', ['lang']),
-    },
-    methods: {
-        updateParent(e) {
-            this.$emit('input', e.target.value)
-        },
-    },
-}
-</script>
-
-<style lang="less" scoped>
-
-</style>
