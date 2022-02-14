@@ -7,7 +7,7 @@ const { lang } = storeToRefs(i18nStore)
 
 const emit = defineEmits(['inputchanged'])
 const props = defineProps({
-    amount: String
+    amount: Number
 })
 const updateParent = (e) => emit('inputchanged', e.target.value)
 </script>

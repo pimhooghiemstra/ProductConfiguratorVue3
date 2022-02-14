@@ -7,11 +7,18 @@ const { lang } = storeToRefs(i18nStore)
 
 import CardChooseHeadline from './product/CardChooseHeadline.vue';
 const inputValue = ref('Hallo mijn lieve Pannie Koek.')
-const updateValue = (text) => inputValue.value = text
+const updateHeadline = (text) => inputValue.value = text
+
+import CardChooseMaintext from './product/CardChooseMaintext.vue';
+const maintext = ref(`
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor numquam ullam perferendis minus soluta aut sit ab, doloremque vero fuga optio aperiam quas ea, animi laboriosam odit iusto non debitis.
+`)
+const updateMaintext = (text) => maintext.value = text
 
 import CardChooseAmount from './product/CardChooseAmount.vue';
 const amount = ref(0)
 const updateAmount = (num) => amount.value = num
+
 
 </script>
 
@@ -36,9 +43,11 @@ const updateAmount = (num) => amount.value = num
                 <b>{{ lang['introduction2'] }}</b>
             </div>
 
-            <CardChooseHeadline :value="inputValue" @inputchanged="updateValue"/>
+            <CardChooseHeadline :value="inputValue" @inputchanged="updateHeadline"/>
 
             <CardChooseAmount :amount="amount" @inputchanged="updateAmount"/>
+
+            <CardChooseMaintext :text="maintext" @inputchanged="updateMaintext"/>
 
 <!--
             <ProductList 
