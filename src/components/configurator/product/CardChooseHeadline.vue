@@ -1,8 +1,10 @@
 <script setup>
+// i18n store
 import { storeToRefs } from 'pinia'
 import { useI18nStore } from '../../../stores/i18n';
 const i18nStore = useI18nStore()
 const { lang } = storeToRefs(i18nStore)
+
 const emit = defineEmits(['inputchanged'])
 const props = defineProps({
     value: String
