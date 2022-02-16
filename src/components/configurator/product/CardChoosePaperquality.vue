@@ -1,42 +1,68 @@
+<script setup>
+import { ref, computed, watch } from 'vue'
+// i18n store
+import { storeToRefs } from 'pinia'
+import { useI18nStore } from '../../../stores/i18n';
+const i18nStore = useI18nStore()
+const { lang } = storeToRefs(i18nStore)
+
+const emit = defineEmits(['inputchanged'])
+const props = defineProps({
+    quality: String,
+    id: String,
+})
+const checked = ref(props.quality)
+const chosen = (e) => {
+    console.log('chosen other radiobutton')
+    setTimeout(() => {
+        emit('inputchanged', e.target.value)
+    }, 2000)
+}
+
+watch(
+    () => props.quality,
+    (newquality, oldquality) => {
+        console.log(`quality changed externally, new value: ${newquality}, old value: ${oldquality}`)
+        if (newquality !== oldquality) checked.value = newquality
+    }
+    
+)
+
+const normalId = computed(() => `normal_${props.id}`)
+const extraId = computed(() => `extra_${props.id}`)
+</script>
+
 <template>
     <div class="form-group">
         <label for="quality">{{ lang['product']['quality'] }}</label>
         <div>
-            <div class="custom-input inline">
-                <input :id="normalId" type="radio" value="normal" :checked="quality === 'normal'" @change="chosen"><label :for="normalId">Normal</label>
+            <!-- <div class="custom-input inline">
+                <input :id="normalId" type="radio" value="normal" v-model="checked" @change="chosen">
+                <label :for="normalId">Normal</label>
             </div>
             <div class="custom-input inline">
-                <input :id="extraId" type="radio" value="extra" :checked="quality === 'extra'" @change="chosen"><label :for="extraId">Extra</label>
+                <input :id="extraId" type="radio" value="extra" v-model="checked" @change="chosen">
+                <label :for="extraId">Extra</label>
+            </div> -->
+            <div>
+                <input :id="normalId" type="radio" value="normal" v-model="checked" @change="chosen">
+                <label :for="normalId">Normal</label>
             </div>
+            <div>
+                <input :id="extraId" type="radio" value="extra" v-model="checked" @change="chosen">
+                <label :for="extraId">Extra</label>
+            </div>
+
+            <p>
+                Current value of prop quality <b>{{ props.quality }}</b>
+            </p>
+
+            <p>
+                Current value of data item quality <b>{{ checked }}</b>
+            </p>
         </div>
     </div>
 </template>
-
-<script>
-// import { mapGetters } from 'vuex'
-export default {
-    name: 'CardChoosePaperquality',
-    model: {
-        prop: 'quality',
-        event: 'chosen'
-    },
-    props: ['id', 'quality'],
-    computed: {
-        ...mapGetters('i18n', ['lang']),
-        normalId() {
-            return `normal_${this.id}`
-        },
-        extraId() {
-            return `extra_${this.id}`
-        },
-    },        
-    methods: {
-        chosen(e) {
-            this.$emit('chosen', e.target.value)
-        },
-    },
-}
-</script>
 
 <style lang="less" scoped>
 input[type=radio] + label {
@@ -47,5 +73,9 @@ input[type=radio] + label {
     &:hover {
         cursor: pointer;
     }
+}
+
+b {
+    font-weight: bold;
 }
 </style>

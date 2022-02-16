@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18nStore } from '../../stores/i18n';
 const i18nStore = useI18nStore()
@@ -13,12 +13,23 @@ import CardChooseMaintext from './product/CardChooseMaintext.vue';
 const maintext = ref(`
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor numquam ullam perferendis minus soluta aut sit ab, doloremque vero fuga optio aperiam quas ea, animi laboriosam odit iusto non debitis.
 `)
-const updateMaintext = (text) => maintext.value = text
+const updateMaintext = (text) => {
+    maintext.value = text
+
+    console.log('Extra side effect => set paper quality to normal')
+    paperQuality.value = 'normal'
+}
 
 import CardChooseAmount from './product/CardChooseAmount.vue';
 const amount = ref(0)
 const updateAmount = (num) => amount.value = num
 
+import CardChoosePaperquality from './product/CardChoosePaperquality.vue';
+const paperQuality = ref('extra')
+const updateQuality = (quality) => paperQuality.value = quality
+
+import CardChoosePaperSize from './product/CardChoosePapersize.vue'
+const paperSize = reactive({size: 'a5'})
 
 </script>
 
@@ -48,6 +59,13 @@ const updateAmount = (num) => amount.value = num
             <CardChooseAmount :amount="amount" @inputchanged="updateAmount"/>
 
             <CardChooseMaintext :text="maintext" @inputchanged="updateMaintext"/>
+
+            <CardChoosePaperquality :quality="paperQuality" id="1" @inputchanged="updateQuality"/>
+
+            <CardChoosePaperSize :paper-size="paperSize"/>
+            <p>
+                Gekozen papier afmeting: {{ paperSize.size}}
+            </p>
 
 <!--
             <ProductList 
