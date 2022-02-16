@@ -1,25 +1,26 @@
+<script setup>
+import { computed } from 'vue'
+const emit = defineEmits(['shape-chosen'])
+const props = defineProps({
+    theshape: String,
+    current: String,
+    id: String
+})
+const inputId = computed(() => `${props.theshape}_${props.id}`)
+const chosen = (e) => emit('shape-chosen', e.target.value)
+</script>
+
 <template>
-    <div class="custom-shape" :class="theshape">
-        <input :id="inputId" type="radio" :value="theshape" :checked="current === theshape" @change="chosen"><label :for="inputId"></label>
+    <!-- <div class="custom-shape" :class="theshape">
+        <input :id="inputId" type="radio" :value="theshape" :checked="current === theshape" @change="chosen">
+        <label :for="inputId"></label>
+    </div> -->
+
+    <div>
+        <input :id="inputId" type="radio" :value="theshape" :checked="current === theshape" @change="chosen">
+        <label :for="inputId">{{ theshape }}</label>
     </div>
 </template>
-
-<script>
-    export default {
-        name: 'CardCustomRadioShape',
-        props: ['theshape', 'current', 'id'],
-        computed: {
-            inputId() {
-                return `${this.theshape}_${this.id}`
-            }
-        },
-        methods: {
-            chosen(e) {
-                this.$emit('shape-chosen', e.target.value)
-            }
-        },
-    }
-</script>
 
 <style lang="less" scoped>
 @orange: #ff9900;

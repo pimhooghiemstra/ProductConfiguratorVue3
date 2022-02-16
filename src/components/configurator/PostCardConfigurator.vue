@@ -31,6 +31,10 @@ const updateQuality = (quality) => paperQuality.value = quality
 import CardChoosePaperSize from './product/CardChoosePapersize.vue'
 const paperSize = reactive({size: 'a5'})
 
+import CardChooseShape from './product/CardChooseShape.vue'
+const shape = ref('portrait')
+const id = '12345'
+const updateShape = (newCardShape) => shape.value = newCardShape
 </script>
 
 <template>
@@ -66,6 +70,10 @@ const paperSize = reactive({size: 'a5'})
             <p>
                 Gekozen papier afmeting: {{ paperSize.size}}
             </p>
+
+            <hr>
+
+            <CardChooseShape :shape="shape" :id="id" @changed="updateShape"/>
 
 <!--
             <ProductList 

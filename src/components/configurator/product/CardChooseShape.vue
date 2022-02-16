@@ -1,3 +1,20 @@
+<script setup>
+// i18n store
+import { storeToRefs } from 'pinia'
+import { useI18nStore } from '../../../stores/i18n';
+const i18nStore = useI18nStore()
+const { lang } = storeToRefs(i18nStore)
+
+const props = defineProps({
+    shape: String,
+    id: String
+})
+const emit = defineEmits(['changed'])
+const chosen = (shape) => emit('changed', shape)
+
+import CardCustomRadioShape from './CardCustomRadioShape.vue'
+</script>
+
 <template>
     <div class="form-group">
         <label for="shape">{{ lang['product']['papershape'] }}</label>
@@ -10,25 +27,3 @@
         </div>
     </div>
 </template>
-
-<script>
-// import { mapGetters } from 'vuex'
-import CardCustomRadioShape from './CardCustomRadioShape.vue'
-export default {
-    name: 'CardChooseShape',
-    components: {CardCustomRadioShape},
-    model: {
-        prop: 'shape',
-        event: 'changed'
-    },
-    props: ['shape', 'id'],
-    computed: {
-        ...mapGetters('i18n', ['lang']),
-    },
-    methods: {
-        chosen(cardShape) {
-            this.$emit('changed', cardShape)
-        },
-    },
-}
-</script>
