@@ -5,11 +5,12 @@ import { useI18nStore } from '../../../stores/i18n';
 const i18nStore = useI18nStore()
 const { lang } = storeToRefs(i18nStore)
 
-const emit = defineEmits(['inputchanged'])
-const props = defineProps({
-    value: String
+defineProps({
+    heading: String
 })
-const updateParent = (e) => emit('inputchanged', e.target.value)
+const emit = defineEmits(['update:heading'])
+
+const updateParent = (e) => emit('update:heading', e.target.value)
 </script>
 
 <template>
@@ -17,7 +18,7 @@ const updateParent = (e) => emit('inputchanged', e.target.value)
         <label for="headline">{{ lang['product']['headline'] }}</label>
         <input id="headline" class="form-control" type="text" 
             :placeholder="lang['product']['headlinePlaceholder']" 
-            :value="props.value" 
+            :value="heading" 
             @input="updateParent">
     </div>
 </template>

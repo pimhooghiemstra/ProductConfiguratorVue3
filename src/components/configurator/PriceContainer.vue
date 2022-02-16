@@ -1,19 +1,19 @@
+<script setup>
+import { storeToRefs } from 'pinia'
+import { useI18nStore } from '../../stores/i18n';
+const i18nStore = useI18nStore()
+const { lang } = storeToRefs(i18nStore)
+
+defineProps({
+    price: Number
+})
+
+</script>
 <template>
     <div id="price">
         {{ lang['price'] }}: &euro; {{ price.toFixed(2) }}
     </div>
 </template>
-
-<script>
-// import { mapGetters } from 'vuex'
-export default {
-    name: 'Price',
-    props: ['price'],
-    computed: {
-        ...mapGetters('i18n', ['lang']),
-    },
-}
-</script>
 
 <style lang="less" scoped>
 #price {

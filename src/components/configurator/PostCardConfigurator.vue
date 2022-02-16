@@ -5,9 +5,8 @@ import { useI18nStore } from '../../stores/i18n';
 const i18nStore = useI18nStore()
 const { lang } = storeToRefs(i18nStore)
 
-import CardChooseHeadline from './product/CardChooseHeadline.vue';
-const inputValue = ref('Hallo mijn lieve Pannie Koek.')
-const updateHeadline = (text) => inputValue.value = text
+import { useProductStore } from '../../stores/product';
+const productStore = useProductStore()
 
 import CardChooseMaintext from './product/CardChooseMaintext.vue';
 const maintext = ref(`
@@ -22,7 +21,10 @@ const updateMaintext = (text) => {
 
 import CardChooseAmount from './product/CardChooseAmount.vue';
 const amount = ref(0)
-const updateAmount = (num) => amount.value = num
+const updateAmount = (num) => {
+    amount.value = parseInt(num)
+    productStore.updatePrice()
+}
 
 import CardChoosePaperquality from './product/CardChoosePaperquality.vue';
 const paperQuality = ref('extra')
@@ -35,6 +37,11 @@ import CardChooseShape from './product/CardChooseShape.vue'
 const shape = ref('portrait')
 const id = '12345'
 const updateShape = (newCardShape) => shape.value = newCardShape
+
+import PriceContainer from './PriceContainer.vue'
+const { price, products } = storeToRefs(productStore)
+
+import CardChooseHeadline from './product/CardChooseHeadline.vue';
 </script>
 
 <template>
@@ -58,7 +65,11 @@ const updateShape = (newCardShape) => shape.value = newCardShape
                 <b>{{ lang['introduction2'] }}</b>
             </div>
 
-            <CardChooseHeadline :value="inputValue" @inputchanged="updateHeadline"/>
+            <!-- With v-model -->
+            <CardChooseHeadline v-model:heading="products[0].config.heading"/>
+
+            <h3>Onze headliner</h3>
+            <p v-text="products[0].config.heading"></p>
 
             <CardChooseAmount :amount="amount" @inputchanged="updateAmount"/>
 
@@ -83,58 +94,19 @@ const updateShape = (newCardShape) => shape.value = newCardShape
                 @remove-product="removeProduct"
                 @add-product="addProduct"
             />
-            
+-->            
             <footer class="row">
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <PriceContainer :price="price"/>
                 </div>
 
-                <div class="col-md-6 col-sm-6 col-xs-6">
+                <!-- <div class="col-md-6 col-sm-6 col-xs-6">
                     <ProceedToCheckoutButton @clicked="handleSubmit"/>
-                </div>
+                </div> -->
             </footer>
--->            
         </div>
     </div>
 </template>
-
-<!-- <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
-import { mapState } from 'pinia'
-import ProductList from './ProductList.vue'
-import PriceContainer from './PriceContainer.vue'
-import ProceedToCheckoutButton from './ProceedToCheckoutButton.vue'
-
-export default {
-    name: 'PostCardConfigurator',
-    components: {
-        ProductList,
-        PriceContainer,
-        ProceedToCheckoutButton,
-    },
-    computed: {
-        ...mapState('configurator', {
-            products: 'products',
-            price: 'price'
-        }),
-        ...mapState('i18n', ['lang']),
-    },
-    methods: {
-        ...mapActions('configurator', [
-            'addProduct',
-            'removeProduct',
-            'updatePrice',
-            'resetProduct'
-        ]),
-        handleSubmit() {
-            console.log('implement another modal that is Vue3 ready')
-        },
-    },
-    mounted() {
-        this.updatePrice()
-    },
-}
-</script> -->
 
 <style lang="less">
 @orange: #FF9900;
