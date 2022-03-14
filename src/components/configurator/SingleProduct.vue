@@ -1,3 +1,33 @@
+
+<script setup>
+import CardChooseShape from './product/CardChooseShape.vue'
+import CardChoosePapersize from './product/CardChoosePapersize.vue'
+import CardChooseAmount from './product/CardChooseAmount.vue'
+import CardChoosePaperquality from './product/CardChoosePaperquality.vue'
+import CardChooseHeadline from './product/CardChooseHeadline.vue'
+import CardChooseMaintext from './product/CardChooseMaintext.vue'
+
+// i18n store
+import { storeToRefs } from 'pinia'
+import { useI18nStore } from '../../stores/i18n';
+const i18nStore = useI18nStore()
+const { lang } = storeToRefs(i18nStore)
+
+defineProps({
+    product: Object,
+})
+
+const emit = defineEmits([
+    'product-updated',
+    'reset-product',
+    'remove-product'
+])
+
+const updateParent = () => emit('product-updated')
+const resetProduct = () => emit('reset-product', product.id)
+const removeProduct = () => emit('remove-product', product.id)
+</script>
+
 <template>
     <div class="single-product">
         <div class="row">
@@ -8,14 +38,14 @@
         
         <div class="row">
             <div class="col-md-6">
-                <CardChooseShape v-model="config.shape" @changed="updateParent" :id="id"/>
-                <CardChoosePapersize v-model="config.size" @chosen="updateParent" />
-                <CardChooseAmount v-model="config.amount" @input-changed="updateParent"/>
-                <CardChoosePaperquality v-model="config.quality" @chosen="updateParent" :id="id"/>
+                <!-- <CardChooseShape v-model="product.config.shape" @changed="updateParent" :id="id"/> -->
+                <CardChoosePapersize v-model:size="product.config.size" />
+                <CardChooseAmount v-model:amount="product.config.amount" />
+                <!-- <CardChoosePaperquality v-model="config.quality" @chosen="updateParent" :id="id"/> -->
             </div>
             <div class="col-md-6">
-                <CardChooseHeadline v-model="config.heading" @input="updateParent" />
-                <CardChooseMaintext v-model="config.body" @input="updateParent" />
+                <CardChooseHeadline v-model:heading="product.config.heading" />
+                <CardChooseMaintext v-model:text="product.config.body" />
 
                 <button class="btn-link pull-right" @click="resetProduct">{{ lang['product']['clearLinkText'] }}</button>
             </div>
@@ -24,44 +54,7 @@
     </div>
 </template>
 
-<script>
-// import { mapGetters } from 'vuex'
-import CardChooseShape from './product/CardChooseShape.vue'
-import CardChoosePapersize from './product/CardChoosePapersize.vue'
-import CardChooseAmount from './product/CardChooseAmount.vue'
-import CardChoosePaperquality from './product/CardChoosePaperquality.vue'
-import CardChooseHeadline from './product/CardChooseHeadline.vue'
-import CardChooseMaintext from './product/CardChooseMaintext.vue'
-export default {
-    name: 'Product',
-    components: {
-        CardChooseShape,
-        CardChoosePapersize,
-        CardChooseAmount,
-        CardChoosePaperquality,
-        CardChooseHeadline,
-        CardChooseMaintext,
-    },
-    model: {
-        prop: 'config',
-    },
-    props: ['id', 'config'],
-    computed: {
-        ...mapGetters('i18n', ['lang']),
-    },
-    methods: {
-        updateParent() {
-            this.$emit('product-updated')
-        },
-        resetProduct() {
-            this.$emit('reset-product', this.id)
-        },
-        removeProduct() {
-            this.$emit('remove-product', this.id)
-        },
-    },
-}
-</script>
+
 
 <style lang="less" scoped>
 .single-product {

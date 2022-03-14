@@ -42,6 +42,20 @@ import PriceContainer from './PriceContainer.vue'
 const { price, products } = storeToRefs(productStore)
 
 import CardChooseHeadline from './product/CardChooseHeadline.vue';
+
+// import TestAutoCompete from './TestWriterAutoComplete.vue'
+
+import SingleProduct from './SingleProduct.vue'
+
+const notifyParent = () => {
+    console.log('product updated...')
+}
+const resetProduct = id => {
+    console.log(`product ${id} was reset`)
+}
+const removeProduct = id => {
+    console.log(`product ${id} was removed`)
+}
 </script>
 
 <template>
@@ -65,8 +79,10 @@ import CardChooseHeadline from './product/CardChooseHeadline.vue';
                 <b>{{ lang['introduction2'] }}</b>
             </div>
 
+            <!-- <TestAutoCompete /> -->
+
             <!-- With v-model -->
-            <CardChooseHeadline v-model:heading="products[0].config.heading"/>
+            <!-- <CardChooseHeadline v-model:heading="products[0].config.heading"/>
 
             <h3>Onze headliner</h3>
             <p v-text="products[0].config.heading"></p>
@@ -84,7 +100,21 @@ import CardChooseHeadline from './product/CardChooseHeadline.vue';
 
             <hr>
 
-            <CardChooseShape :shape="shape" :id="id" @changed="updateShape"/>
+            <CardChooseShape :shape="shape" :id="id" @changed="updateShape"/> -->
+
+            <!-- Single product -->
+            <div class="row">
+                <div class="col-md-12">
+                    <SingleProduct 
+                        v-for="product in products" 
+                        :key="product.id" 
+                        :product="product" 
+                        @product-updated="notifyParent"
+                        @reset-product="resetProduct"
+                        @remove-product="removeProduct"
+                    />
+                </div>
+            </div>
 
 <!--
             <ProductList 
