@@ -12,7 +12,7 @@ import { useI18nStore } from '../../stores/i18n';
 const i18nStore = useI18nStore()
 const { lang } = storeToRefs(i18nStore)
 
-defineProps({
+const props = defineProps({
     product: Object,
 })
 
@@ -23,28 +23,50 @@ const emit = defineEmits([
 ])
 
 const updateParent = () => emit('product-updated')
-const resetProduct = () => emit('reset-product', product.id)
-const removeProduct = () => emit('remove-product', product.id)
+const resetProduct = () => emit('reset-product', props.product.id)
+const removeProduct = () => emit('remove-product', props.product.id)
+
 </script>
 
 <template>
     <div class="single-product">
         <div class="row">
             <div class="col-md-12">
-                <button class="remove-product-button pull-right" @click="removeProduct"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                <button class="remove-product-button pull-right" @click="removeProduct">
+                    &times;
+                </button>
             </div>
         </div>
         
         <div class="row">
             <div class="col-md-6">
-                <CardChooseShape :product="product" />
-                <CardChoosePapersize v-model:size="product.config.size" />
-                <CardChooseAmount v-model:amount="product.config.amount" />
-                <CardChoosePaperquality v-model:quality="product.config.quality" :id="product.id" />
+                <CardChooseShape 
+                    :product="product" 
+                    @update:shape="updateParent"
+                />
+                <CardChoosePapersize 
+                    v-model:size="product.config.size" 
+                    @update:size="updateParent"
+                />
+                <CardChooseAmount 
+                    v-model:amount="product.config.amount" 
+                    @update:amount="updateParent"
+                />
+                <CardChoosePaperquality 
+                    v-model:quality="product.config.quality" 
+                    :id="product.id" 
+                    @update:quality="updateParent"
+                />
             </div>
             <div class="col-md-6">
-                <CardChooseHeadline v-model:heading="product.config.heading" />
-                <CardChooseMaintext v-model:text="product.config.body" />
+                <CardChooseHeadline 
+                    v-model:heading="product.config.heading" 
+                    @update:heading="updateParent"
+                />
+                <CardChooseMaintext 
+                    v-model:text="product.config.body" 
+                    @update:text="updateParent"
+                />
 
                 <button class="btn-link pull-right" @click="resetProduct">{{ lang['product']['clearLinkText'] }}</button>
             </div>

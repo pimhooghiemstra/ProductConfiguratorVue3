@@ -17,7 +17,10 @@ const updateParent = (e) => emit('update:size', e.target.value)
 <template>
     <div class="form-group">
         <label for="size">{{ lang['product']['papersize'] }}</label>
-        <select id="size" class="form-control" :value="size" @change="updateParent">
+        <select id="size" class="form-control" 
+            :value="size" 
+            @change="updateParent"
+        >
             <option value="a4">A4</option>
             <option value="a5">A5</option>
             <option value="a6">A6</option>
