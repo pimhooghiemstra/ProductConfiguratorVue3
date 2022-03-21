@@ -1,30 +1,23 @@
+<script setup>
+import { computed } from 'vue'
+// i18n store
+import { storeToRefs } from 'pinia'
+import { useI18nStore } from '../../stores/i18n';
+const i18nStore = useI18nStore()
+const { lang } = storeToRefs(i18nStore)
+
+const props = defineProps({products: Object})
+
+const emit = defineEmits(['add-product'])
+
+const add = () => emit('add-product')
+</script>
+
 <template>
     <div id="add-cart">
-        <button class="btn btn-secondary" @click="add" v-text="buttonText"></button>
+        <button class="btn btn-secondary" @click="add">{{ products.length ? lang['addAnotherProductButtonText'] : lang['addProductButtonText'] }}</button>
     </div>
 </template>
-
-<script>
-// import { mapGetters } from 'vuex'
-export default {
-    name: 'addProduct',
-    props: ['products'],
-    computed: {
-        ...mapGetters('i18n', ['lang']),
-        buttonText() {
-            if (this.products.length > 0) {
-                return this.lang['addAnotherProductButtonText']
-            }
-            return this.lang['addProductButtonText']
-        },
-    },
-    methods: {
-        add() {
-            this.$emit('add-product')
-        },
-    },
-}
-</script>
 
 <style lang="less" scoped>
 #add-cart {
@@ -48,6 +41,4 @@ export default {
         }
     }
 }
-
-
 </style>

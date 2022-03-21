@@ -13,17 +13,12 @@ const { price, products } = storeToRefs(productStore)
 
 // import TestAutoCompete from './TestWriterAutoComplete.vue'
 
-import SingleProduct from './SingleProduct.vue'
+import ProductList from './ProductList.vue'
 
-const notifyParent = () => {
-    console.log('product updated...')
-}
-const resetProduct = id => {
-    console.log(`product ${id} was reset`)
-}
-const removeProduct = id => {
-    console.log(`product ${id} was removed`)
-}
+const updatePrice = () => productStore.updatePrice()
+const resetProduct = id => productStore.resetProduct(id)
+const removeProduct = id => productStore.removeProduct(id)
+const addProduct = () => productStore.addProduct()
 </script>
 
 <template>
@@ -49,22 +44,6 @@ const removeProduct = id => {
 
             <!-- <TestAutoCompete /> -->
 
-            <!-- Single product -->
-            <h2>List of products</h2>
-            <div class="row">
-                <div class="col-md-12">
-                    <SingleProduct 
-                        v-for="product in products" 
-                        :key="product.id" 
-                        :product="product" 
-                        @product-updated="notifyParent"
-                        @reset-product="resetProduct"
-                        @remove-product="removeProduct"
-                    />
-                </div>
-            </div>
-
-<!--
             <ProductList 
                 :products="products"
                 @update-price="updatePrice"
@@ -72,7 +51,7 @@ const removeProduct = id => {
                 @remove-product="removeProduct"
                 @add-product="addProduct"
             />
--->            
+
             <footer class="row">
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <PriceContainer :price="price"/>
