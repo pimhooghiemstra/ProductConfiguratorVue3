@@ -103,6 +103,7 @@ const removeProduct = id => {
             <CardChooseShape :shape="shape" :id="id" @changed="updateShape"/> -->
 
             <!-- Single product -->
+            <h2>List of products</h2>
             <div class="row">
                 <div class="col-md-12">
                     <SingleProduct 

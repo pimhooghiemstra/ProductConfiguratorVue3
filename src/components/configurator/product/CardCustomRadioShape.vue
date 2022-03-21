@@ -1,23 +1,22 @@
 <script setup>
 import { computed } from 'vue'
-const emit = defineEmits(['shape-chosen'])
+
+const emit = defineEmits(['update:shape'])
+
 const props = defineProps({
     theshape: String,
-    current: String,
+    shape: String,
     id: String
 })
+
 const inputId = computed(() => `${props.theshape}_${props.id}`)
-const chosen = (e) => emit('shape-chosen', e.target.value)
+const chosen = (e) => emit('update:shape', e.target.value)
+
 </script>
 
 <template>
-    <!-- <div class="custom-shape" :class="theshape">
-        <input :id="inputId" type="radio" :value="theshape" :checked="current === theshape" @change="chosen">
-        <label :for="inputId"></label>
-    </div> -->
-
-    <div>
-        <input :id="inputId" type="radio" :value="theshape" :checked="current === theshape" @change="chosen">
+    <div class="custom-shape" :class="theshape">
+        <input :id="inputId" type="radio" :value="theshape" :checked="shape === theshape" @change="chosen">
         <label :for="inputId">{{ theshape }}</label>
     </div>
 </template>

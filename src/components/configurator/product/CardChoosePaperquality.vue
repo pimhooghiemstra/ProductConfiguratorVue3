@@ -6,16 +6,15 @@ import { useI18nStore } from '../../../stores/i18n';
 const i18nStore = useI18nStore()
 const { lang } = storeToRefs(i18nStore)
 
-const emit = defineEmits(['inputchanged'])
+const emit = defineEmits(['update:quality'])
 const props = defineProps({
     quality: String,
     id: String,
 })
 const checked = ref(props.quality)
 const chosen = (e) => {
-    console.log('chosen other radiobutton')
     setTimeout(() => {
-        emit('inputchanged', e.target.value)
+        emit('update:quality', e.target.value)
     }, 2000)
 }
 
@@ -25,7 +24,6 @@ watch(
         console.log(`quality changed externally, new value: ${newquality}, old value: ${oldquality}`)
         if (newquality !== oldquality) checked.value = newquality
     }
-    
 )
 
 const normalId = computed(() => `normal_${props.id}`)
@@ -36,14 +34,6 @@ const extraId = computed(() => `extra_${props.id}`)
     <div class="form-group">
         <label for="quality">{{ lang['product']['quality'] }}</label>
         <div>
-            <!-- <div class="custom-input inline">
-                <input :id="normalId" type="radio" value="normal" v-model="checked" @change="chosen">
-                <label :for="normalId">Normal</label>
-            </div>
-            <div class="custom-input inline">
-                <input :id="extraId" type="radio" value="extra" v-model="checked" @change="chosen">
-                <label :for="extraId">Extra</label>
-            </div> -->
             <div>
                 <input :id="normalId" type="radio" value="normal" v-model="checked" @change="chosen">
                 <label :for="normalId">Normal</label>
@@ -53,6 +43,7 @@ const extraId = computed(() => `extra_${props.id}`)
                 <label :for="extraId">Extra</label>
             </div>
 
+            <!--
             <p>
                 Current value of prop quality <b>{{ props.quality }}</b>
             </p>
@@ -60,22 +51,23 @@ const extraId = computed(() => `extra_${props.id}`)
             <p>
                 Current value of data item quality <b>{{ checked }}</b>
             </p>
+            -->
         </div>
     </div>
 </template>
 
 <style lang="less" scoped>
-input[type=radio] + label {
-    margin-left: 5px;
-    margin-right: 20px;
-    font-weight: normal;
+input[type=radio] {
+    accent-color: orange;
 
-    &:hover {
-        cursor: pointer;
+    &+label {
+        margin-left: 5px;
+        margin-right: 20px;
+        font-weight: normal;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
-}
-
-b {
-    font-weight: bold;
 }
 </style>

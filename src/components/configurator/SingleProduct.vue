@@ -1,4 +1,3 @@
-
 <script setup>
 import CardChooseShape from './product/CardChooseShape.vue'
 import CardChoosePapersize from './product/CardChoosePapersize.vue'
@@ -38,10 +37,10 @@ const removeProduct = () => emit('remove-product', product.id)
         
         <div class="row">
             <div class="col-md-6">
-                <!-- <CardChooseShape v-model="product.config.shape" @changed="updateParent" :id="id"/> -->
+                <CardChooseShape :product="product" />
                 <CardChoosePapersize v-model:size="product.config.size" />
                 <CardChooseAmount v-model:amount="product.config.amount" />
-                <!-- <CardChoosePaperquality v-model="config.quality" @chosen="updateParent" :id="id"/> -->
+                <CardChoosePaperquality v-model:quality="product.config.quality" :id="product.id" />
             </div>
             <div class="col-md-6">
                 <CardChooseHeadline v-model:heading="product.config.heading" />

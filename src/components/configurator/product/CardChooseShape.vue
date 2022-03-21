@@ -6,11 +6,8 @@ const i18nStore = useI18nStore()
 const { lang } = storeToRefs(i18nStore)
 
 const props = defineProps({
-    shape: String,
-    id: String
+    product: Object,
 })
-const emit = defineEmits(['changed'])
-const chosen = (shape) => emit('changed', shape)
 
 import CardCustomRadioShape from './CardCustomRadioShape.vue'
 </script>
@@ -19,11 +16,31 @@ import CardCustomRadioShape from './CardCustomRadioShape.vue'
     <div class="form-group">
         <label for="shape">{{ lang['product']['papershape'] }}</label>
         <div>
-            <CardCustomRadioShape theshape="square" :current="shape" @shape-chosen="chosen" :id="id"/>
-            <CardCustomRadioShape theshape="portrait" :current="shape" @shape-chosen="chosen" :id="id"/>
-            <CardCustomRadioShape theshape="landscape" :current="shape" @shape-chosen="chosen" :id="id"/>
-            <CardCustomRadioShape theshape="diamond" :current="shape" @shape-chosen="chosen" :id="id"/>
-            <CardCustomRadioShape theshape="circle" :current="shape" @shape-chosen="chosen" :id="id"/>
+            <CardCustomRadioShape 
+                v-model:shape="product.config.shape" 
+                theshape="square"
+                :id="product.id"
+            />
+            <CardCustomRadioShape
+                v-model:shape="product.config.shape" 
+                theshape="portrait" 
+                :id="product.id"
+            />
+            <CardCustomRadioShape 
+                v-model:shape="product.config.shape" 
+                theshape="landscape" 
+                :id="product.id"
+            />
+            <CardCustomRadioShape 
+                v-model:shape="product.config.shape" 
+                theshape="diamond" 
+                :id="product.id"
+            />
+            <CardCustomRadioShape 
+                v-model:shape="product.config.shape" 
+                theshape="circle" 
+                :id="product.id"
+            />
         </div>
     </div>
 </template>
