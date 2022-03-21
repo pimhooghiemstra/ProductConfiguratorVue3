@@ -7,10 +7,10 @@ const { lang } = storeToRefs(i18nStore)
 
 import { useProductStore } from '../../stores/product';
 const productStore = useProductStore()
-
-import PriceContainer from './PriceContainer.vue'
 const { price, products } = storeToRefs(productStore)
 
+import PriceContainer from './PriceContainer.vue'
+import ProceedToCheckoutButton from './ProceedToCheckoutButton.vue'
 // import TestAutoCompete from './TestWriterAutoComplete.vue'
 
 import ProductList from './ProductList.vue'
@@ -19,6 +19,9 @@ const updatePrice = () => productStore.updatePrice()
 const resetProduct = id => productStore.resetProduct(id)
 const removeProduct = id => productStore.removeProduct(id)
 const addProduct = () => productStore.addProduct()
+const handleSubmit = () => {
+    console.log('handleSubmit not yet implemented => need a new modal plugin compatible with vue 3')
+}
 </script>
 
 <template>
@@ -57,9 +60,9 @@ const addProduct = () => productStore.addProduct()
                     <PriceContainer :price="price"/>
                 </div>
 
-                <!-- <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="col-md-6 col-sm-6 col-xs-6">
                     <ProceedToCheckoutButton @clicked="handleSubmit"/>
-                </div> -->
+                </div>
             </footer>
         </div>
     </div>

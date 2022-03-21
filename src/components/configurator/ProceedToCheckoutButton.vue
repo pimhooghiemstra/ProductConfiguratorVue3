@@ -1,23 +1,19 @@
+<script setup>
+import { storeToRefs } from 'pinia'
+import { useI18nStore } from '../../stores/i18n';
+const i18nStore = useI18nStore()
+const { lang } = storeToRefs(i18nStore)
+    
+const emit = defineEmits(['clicked'])
+const clickHandler = () => emit('clicked')
+</script>
+
 <template>
     <div>
         <button class="btn btn-primary pull-right" @click="clickHandler"><i class="fa fa-chevron-right"></i> {{ lang['checkoutButtonText'] }}</button>
     </div>
 </template>
 
-<script>
-// import { mapGetters } from 'vuex'
-export default {
-    name: 'CheckoutButton',
-    computed: {
-        ...mapGetters('i18n', ['lang']),
-    },
-    methods: {
-        clickHandler() {
-            this.$emit('clicked')
-        },
-    },
-}
-</script>
 
 <style lang="less" scoped>
 .btn-primary {
