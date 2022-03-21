@@ -8,40 +8,8 @@ const { lang } = storeToRefs(i18nStore)
 import { useProductStore } from '../../stores/product';
 const productStore = useProductStore()
 
-import CardChooseMaintext from './product/CardChooseMaintext.vue';
-const maintext = ref(`
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor numquam ullam perferendis minus soluta aut sit ab, doloremque vero fuga optio aperiam quas ea, animi laboriosam odit iusto non debitis.
-`)
-const updateMaintext = (text) => {
-    maintext.value = text
-
-    console.log('Extra side effect => set paper quality to normal')
-    paperQuality.value = 'normal'
-}
-
-import CardChooseAmount from './product/CardChooseAmount.vue';
-const amount = ref(0)
-const updateAmount = (num) => {
-    amount.value = parseInt(num)
-    productStore.updatePrice()
-}
-
-import CardChoosePaperquality from './product/CardChoosePaperquality.vue';
-const paperQuality = ref('extra')
-const updateQuality = (quality) => paperQuality.value = quality
-
-import CardChoosePaperSize from './product/CardChoosePapersize.vue'
-const paperSize = reactive({size: 'a5'})
-
-import CardChooseShape from './product/CardChooseShape.vue'
-const shape = ref('portrait')
-const id = '12345'
-const updateShape = (newCardShape) => shape.value = newCardShape
-
 import PriceContainer from './PriceContainer.vue'
 const { price, products } = storeToRefs(productStore)
-
-import CardChooseHeadline from './product/CardChooseHeadline.vue';
 
 // import TestAutoCompete from './TestWriterAutoComplete.vue'
 
@@ -81,27 +49,6 @@ const removeProduct = id => {
 
             <!-- <TestAutoCompete /> -->
 
-            <!-- With v-model -->
-            <!-- <CardChooseHeadline v-model:heading="products[0].config.heading"/>
-
-            <h3>Onze headliner</h3>
-            <p v-text="products[0].config.heading"></p>
-
-            <CardChooseAmount :amount="amount" @inputchanged="updateAmount"/>
-
-            <CardChooseMaintext :text="maintext" @inputchanged="updateMaintext"/>
-
-            <CardChoosePaperquality :quality="paperQuality" id="1" @inputchanged="updateQuality"/>
-
-            <CardChoosePaperSize :paper-size="paperSize"/>
-            <p>
-                Gekozen papier afmeting: {{ paperSize.size}}
-            </p>
-
-            <hr>
-
-            <CardChooseShape :shape="shape" :id="id" @changed="updateShape"/> -->
-
             <!-- Single product -->
             <h2>List of products</h2>
             <div class="row">
@@ -140,8 +87,6 @@ const removeProduct = id => {
 </template>
 
 <style lang="less">
-@orange: #FF9900;
-
 #intro {
     width: 280px;
     margin-left: auto;
@@ -172,65 +117,4 @@ footer {
     margin-bottom: 30px;
 }
 
-/* Custom radiobuttons and checkboxes */
-div.custom-input {
-
-	&.inline {
-		display: inline;
-	}
-
-	label {
-		font-size: 15px;
-		margin-right: 10px;
-	}
-
-	/* General icon styling */
-	input[type=radio],
-	input[type=checkbox] {
-	    border: 0;
-	    clip: rect(0 0 0 0);
-	    height: 1px;
-	    margin: -1px;
-	    overflow: hidden;
-	    padding: 0;
-	    position: absolute;
-	    width: 1px;
-	}
-
-	/* Unchecked icon styling */
-	input[type=radio] ~ label:before,
-	input[type=checkbox] ~ label:before {
-	    font-family: FontAwesome;
-	    display: inline-block;
-	    content: "\f10c";
-	    letter-spacing: 10px;
-	    font-size: 20px;
-	    color: @orange;
-	    width: 1.4em;
-	    position: relative;
-	    top: 2px;
-	}
-
-	/* Checked radio icon styling */
-	input[type=radio]:checked ~ label:before {
-	    content: "\f192";
-	}
-
-	/* Update icon for checkbox (unchecked) */
-	input[type=checkbox] ~ label:before {
-	    content: "\f096";
-	    top: 3px;
-	}
-
-	/* Update icon for checkbox (checked) */
-	input[type=checkbox]:checked ~ label:before {
-	    content: "\f14a";
-	}
-
-	input[type=radio]:focus ~ label:before,
-	input[type=checkbox]:focus ~ label:before
-	{
-	    color: @orange;
-	}
-}
 </style>

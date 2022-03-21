@@ -10,7 +10,7 @@ defineProps({
 })
 const emit = defineEmits(['update:amount'])
 
-const updateParent = (e) => emit('update:amount', e.target.value)
+const updateParent = (e) => emit('update:amount', parseInt(e.target.value))
 </script>
 
 <template>

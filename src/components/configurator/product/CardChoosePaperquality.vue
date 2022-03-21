@@ -57,8 +57,9 @@ const extraId = computed(() => `extra_${props.id}`)
 </template>
 
 <style lang="less" scoped>
+@orange: #FF9900;
 input[type=radio] {
-    accent-color: orange;
+    accent-color: @orange;
 
     &+label {
         margin-left: 5px;
