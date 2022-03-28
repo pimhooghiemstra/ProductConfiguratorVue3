@@ -9,17 +9,17 @@ const clickHandler = () => emit('clicked')
 </script>
 
 <template>
-    <div>
-        <button class="btn btn-primary pull-right" @click="clickHandler"><i class="fa fa-chevron-right"></i> {{ lang['checkoutButtonText'] }}</button>
-    </div>
+    <button class="btn btn-primary pull-right" @click="clickHandler">> {{ lang['checkoutButtonText'] }}</button>
 </template>
 
 
 <style lang="less" scoped>
 .btn-primary {
+    justify-self: end;
     background: #ff9900;
     border: 1px solid #cc7a00;
     width: 180px;
     font-weight: bold;
+    color: white;
 }
 </style>

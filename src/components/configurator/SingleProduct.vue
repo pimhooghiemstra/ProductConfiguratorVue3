@@ -25,21 +25,18 @@ const emit = defineEmits([
 const updateParent = () => emit('product-updated')
 const resetProduct = () => emit('reset-product', props.product.id)
 const removeProduct = () => emit('remove-product', props.product.id)
-
 </script>
 
 <template>
     <div class="single-product">
-        <div class="row">
-            <div class="col-md-12">
-                <button class="remove-product-button pull-right" @click="removeProduct">
-                    &times;
-                </button>
-            </div>
+        <div class="remove-product-container">
+            <button class="remove-product-button" @click="removeProduct">
+                &times;
+            </button>
         </div>
         
-        <div class="row">
-            <div class="col-md-6">
+        <div class="product-form">
+            <div>
                 <CardChooseShape 
                     :product="product" 
                     @update:shape="updateParent"
@@ -58,7 +55,7 @@ const removeProduct = () => emit('remove-product', props.product.id)
                     @update:quality="updateParent"
                 />
             </div>
-            <div class="col-md-6">
+            <div>
                 <CardChooseHeadline 
                     v-model:heading="product.config.heading" 
                     @update:heading="updateParent"
@@ -68,7 +65,7 @@ const removeProduct = () => emit('remove-product', props.product.id)
                     @update:text="updateParent"
                 />
 
-                <button class="btn-link pull-right" @click="resetProduct">{{ lang['product']['clearLinkText'] }}</button>
+                <button class="reset-link" @click="resetProduct">{{ lang['product']['clearLinkText'] }}</button>
             </div>
         </div>
         
@@ -83,31 +80,45 @@ const removeProduct = () => emit('remove-product', props.product.id)
     border: 1px solid #dcdcdc;
     margin-bottom: 20px;
 
-    .remove-product-button {
-        background: none;
-        border: none;
+    .remove-product-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: end;
 
-        span {
-            font-size: 25px;
-            color: #aaa;
-        }
+        .remove-product-button {
+            background: none;
+            border: none;
+            border: 1px solid #333;
+            border-radius: 50%;
+            font-size: 22px;
+            padding: 1px 7px;
 
-        &:hover {
-            outline: none;
-            color: #878787;
+            &:hover {
+                cursor: pointer;
+                outline: none;
+                color: #878787;
+                border-color: #878787;
+            }
         }
     }
 
-    .btn-link {
-        background: none;
-        border: none;
-        color: #FF9900;
-        text-decoration: underline;
-        font-size: 14px;
+    .product-form {
+        display: grid;
+        grid-gap: 15px;
+        grid-template-columns: 1fr 1fr;
 
-        &:hover {
-            outline: none;
-            color: #cc7a00;
+        .reset-link {
+            background: none;
+            border: none;
+            color: #FF9900;
+            text-decoration: underline;
+            font-size: 14px;
+            float: right;
+
+            &:hover {
+                outline: none;
+                color: #cc7a00;
+            }
         }
     }
 }

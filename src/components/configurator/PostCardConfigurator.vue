@@ -56,14 +56,10 @@ const handleSubmit = () => showModal.value = true
                 @add-product="addProduct"
             />
 
-            <footer class="row">
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                    <PriceContainer :price="price"/>
-                </div>
+            <footer>
+                <PriceContainer :price="price"/>
 
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                    <ProceedToCheckoutButton @clicked="handleSubmit"/>
-                </div>
+                <ProceedToCheckoutButton @clicked="handleSubmit"/>
             </footer>
 
             <CheckoutModal :showModal="showModal"/>
@@ -99,6 +95,8 @@ const handleSubmit = () => showModal.value = true
 }
 
 footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     margin-bottom: 30px;
 }
 </style>
