@@ -14,14 +14,15 @@ import ProceedToCheckoutButton from './ProceedToCheckoutButton.vue'
 // import TestAutoCompete from './TestWriterAutoComplete.vue'
 
 import ProductList from './ProductList.vue'
+import CheckoutModal from './CheckoutModal.vue'
 
 const updatePrice = () => productStore.updatePrice()
 const resetProduct = id => productStore.resetProduct(id)
 const removeProduct = id => productStore.removeProduct(id)
 const addProduct = () => productStore.addProduct()
-const handleSubmit = () => {
-    console.log('handleSubmit not yet implemented => need a new modal plugin compatible with vue 3')
-}
+
+const showModal = ref(false)
+const handleSubmit = () => showModal.value = true
 </script>
 
 <template>
@@ -64,6 +65,8 @@ const handleSubmit = () => {
                     <ProceedToCheckoutButton @clicked="handleSubmit"/>
                 </div>
             </footer>
+
+            <CheckoutModal :showModal="showModal"/>
         </div>
     </div>
 </template>

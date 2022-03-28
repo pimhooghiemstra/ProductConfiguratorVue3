@@ -30,6 +30,7 @@ const i18n = new vI18n({
       price: 'Prijs',
 
       checkoutButtonText: 'Verder naar afrekenen',
+      checkoutTitle: 'Afrekenen',
       checkoutMessage: 'In een echte app zou je nu naar de winkelwagen gaan om af te rekenen. Vandaag eindigt het hier!',
     },
     'en-us': {
@@ -57,6 +58,7 @@ const i18n = new vI18n({
       price: 'Price',
 
       checkoutButtonText: 'Proceed to checkout',
+      checkoutTitle: 'Checkout',
       checkoutMessage: 'Normally, you would proceed to the checkout, fill out the form and get your product. But this is a demo and this popup is the finish!',
     },
   } 
