@@ -101,5 +101,4 @@ const handleSubmit = () => showModal.value = true
 footer {
     margin-bottom: 30px;
 }
-
 </style>
