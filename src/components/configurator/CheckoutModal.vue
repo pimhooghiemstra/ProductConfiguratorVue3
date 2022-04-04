@@ -26,12 +26,12 @@ defineProps({
 </template>
 
 <style scoped>
-::v-deep .modal-container {
+:deep(.modal-container) {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-::v-deep .modal-content {
+:deep(.modal-content) {
   position: relative;
   display: grid;
   place-items: center;
@@ -56,7 +56,7 @@ defineProps({
 </style>
 
 <style scoped>
-.dark-mode div::v-deep .modal-content {
+.dark-mode div:deep(.modal-content) {
   border-color: #2d3748;
   background-color: #1a202c;
 }
