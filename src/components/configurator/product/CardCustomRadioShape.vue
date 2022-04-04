@@ -17,7 +17,7 @@ const chosen = (e) => emit('update:shape', e.target.value)
 <template>
     <div class="custom-shape" :class="theshape">
         <input :id="inputId" type="radio" :value="theshape" :checked="shape === theshape" @change="chosen">
-        <label :for="inputId">{{ theshape }}</label>
+        <label :for="inputId"></label>
     </div>
 </template>
 
@@ -28,6 +28,7 @@ const chosen = (e) => emit('update:shape', e.target.value)
     display: inline-block;
     
     label {
+        display: block;
         width: 40px;
         height: 40px;
         margin-right: 5px;
