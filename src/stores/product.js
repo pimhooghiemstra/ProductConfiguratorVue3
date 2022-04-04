@@ -7,7 +7,7 @@ export const useProductStore = defineStore('product', {
             {
                 id: uuidv4(),
                 config: {
-                    heading: 'Titel van uw kaart',
+                    heading: '',
                     body: '',
                     amount: 10,
                     shape: 'portrait', // options: 'rect', 'diamond', 'circle', portrait' or 'landscape'

@@ -87,6 +87,30 @@ const handleSubmit = () => showModal.value = true
 
 .form-group {
     margin-bottom: 30px;
+
+    label {
+        display: block;
+        font-weight: bold;
+    }
+
+    select, input[type=number], input[type=text] {
+        width: 100%;
+        height: 40px;
+        border: 1px solid gray;
+        padding-left: 10px;
+
+        &:focus {
+            border: 1px solid orange;
+        }
+    }
+
+    textarea {
+        width: 100%;
+        height: 140px;
+        border: 1px solid gray;
+        padding: 10px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
 }
 
 .form-control {

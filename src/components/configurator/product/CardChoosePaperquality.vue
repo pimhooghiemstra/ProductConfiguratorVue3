@@ -33,42 +33,48 @@ const extraId = computed(() => `extra_${props.id}`)
 <template>
     <div class="form-group">
         <label for="quality">{{ lang['product']['quality'] }}</label>
-        <div>
-            <div>
+        <div id="radios">
+            <div class="input-group">
                 <input :id="normalId" type="radio" value="normal" v-model="checked" @change="chosen">
                 <label :for="normalId">Normal</label>
             </div>
-            <div>
+            <div class="input-group">
                 <input :id="extraId" type="radio" value="extra" v-model="checked" @change="chosen">
                 <label :for="extraId">Extra</label>
             </div>
-
-            <!--
-            <p>
-                Current value of prop quality <b>{{ props.quality }}</b>
-            </p>
-
-            <p>
-                Current value of data item quality <b>{{ checked }}</b>
-            </p>
-            -->
         </div>
     </div>
 </template>
 
 <style lang="less" scoped>
 @orange: #FF9900;
-input[type=radio] {
-    accent-color: @orange;
 
-    &+label {
-        margin-left: 5px;
-        margin-right: 20px;
-        font-weight: normal;
+#radios {
+    display: grid;
+    grid-template-columns: 100px 100px;
+    grid-gap: 25px;
 
-        &:hover {
-            cursor: pointer;
+    .input-group {
+        display: grid;
+        grid-template-columns: 24px 1fr;
+        align-items: center;
+
+        input[type=radio] {
+            accent-color: @orange;
+            justify-self: center;
+
+            &+label {
+                margin-left: 5px;
+                margin-right: 20px;
+                font-weight: normal;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
         }
     }
 }
+
+
 </style>

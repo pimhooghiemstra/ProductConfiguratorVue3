@@ -53,3 +53,7 @@ const updateParent = (e) => emit('update:shape')
         </div>
     </div>
 </template>
+
+<style scoped>
+
+</style>

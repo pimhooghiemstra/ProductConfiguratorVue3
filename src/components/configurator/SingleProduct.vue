@@ -78,7 +78,7 @@ const removeProduct = () => emit('remove-product', props.product.id)
 .single-product {
     padding: 10px 20px 20px 20px;
     border: 1px solid #dcdcdc;
-    margin-bottom: 20px;
+    margin-bottom: 20px;    
 
     .remove-product-container {
         display: grid;
@@ -104,7 +104,7 @@ const removeProduct = () => emit('remove-product', props.product.id)
 
     .product-form {
         display: grid;
-        grid-gap: 15px;
+        grid-gap: 25px;
         grid-template-columns: 1fr 1fr;
 
         .reset-link {
