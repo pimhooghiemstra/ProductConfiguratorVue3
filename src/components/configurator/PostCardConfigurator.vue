@@ -11,7 +11,6 @@ const { price, products } = storeToRefs(productStore)
 
 import PriceContainer from './PriceContainer.vue'
 import ProceedToCheckoutButton from './ProceedToCheckoutButton.vue'
-// import TestAutoCompete from './TestWriterAutoComplete.vue'
 
 import ProductList from './ProductList.vue'
 import CheckoutModal from './CheckoutModal.vue'
@@ -45,8 +44,6 @@ const handleSubmit = () => showModal.value = true
 
                 <b>{{ lang['introduction2'] }}</b>
             </div>
-
-            <!-- <TestAutoCompete /> -->
 
             <ProductList 
                 :products="products"
