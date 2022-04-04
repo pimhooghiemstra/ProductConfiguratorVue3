@@ -30,7 +30,7 @@ const removeProduct = () => emit('remove-product', props.product.id)
 <template>
     <div class="single-product">
         <div class="remove-product-container">
-            <button class="remove-product-button" @click="removeProduct">
+            <button class="close-button remove-product-button" @click="removeProduct">
                 &times;
             </button>
         </div>
@@ -84,22 +84,6 @@ const removeProduct = () => emit('remove-product', props.product.id)
         display: grid;
         grid-template-columns: 1fr;
         justify-items: end;
-
-        .remove-product-button {
-            background: none;
-            border: none;
-            border: 1px solid #333;
-            border-radius: 50%;
-            font-size: 22px;
-            padding: 1px 7px;
-
-            &:hover {
-                cursor: pointer;
-                outline: none;
-                color: #878787;
-                border-color: #878787;
-            }
-        }
     }
 
     .product-form {

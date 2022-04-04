@@ -13,12 +13,14 @@ defineProps({
 
 <template>
     <vue-final-modal v-model="showModal" classes="modal-container" content-class="modal-content">
-        <button class="modal__close" @click="showModal = false">
-            x
+        <button class="close-button modal__close" @click="showModal = false">
+            &times;
         </button>
-        <span class="modal__title">Afrekenen</span>
-        <div class="modal__content">
-            <p>{{ lang['checkoutMessage'] }}</p>
+        <div>
+          <span class="modal__title">Afrekenen</span>
+          <div class="modal__content">
+              <p>{{ lang['checkoutMessage'] }}</p>
+          </div>
         </div>
     </vue-final-modal>
 </template>
@@ -31,18 +33,20 @@ defineProps({
 }
 ::v-deep .modal-content {
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  place-items: center;
   margin: 0 1rem;
-  padding: 1rem;
+  padding: 1rem 6rem;
   border: 1px solid #e2e8f0;
   border-radius: 0.25rem;
   background: #fff;
+  height: 250px;
 }
 .modal__title {
   margin: 0 2rem 0 0;
   font-size: 1.5rem;
   font-weight: 700;
+  color: #ff9900;
 }
 .modal__close {
   position: absolute;

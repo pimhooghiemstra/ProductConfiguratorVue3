@@ -82,7 +82,6 @@ const handleSubmit = () => showModal.value = true
            margin-top: 10px;
         }
     }
-    
 }
 
 .form-group {
@@ -110,6 +109,22 @@ const handleSubmit = () => showModal.value = true
         border: 1px solid gray;
         padding: 10px;
         font-family: Arial, Helvetica, sans-serif;
+    }
+}
+
+.close-button {
+    background: none;
+    border: none;
+    border: 1px solid #333;
+    border-radius: 50%;
+    font-size: 22px;
+    padding: 1px 7px;
+
+    &:hover {
+        cursor: pointer;
+        outline: none;
+        color: #878787;
+        border-color: #878787;
     }
 }
 
