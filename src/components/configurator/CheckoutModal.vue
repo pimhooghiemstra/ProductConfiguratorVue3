@@ -36,11 +36,11 @@ defineProps({
   display: grid;
   place-items: center;
   margin: 0 1rem;
-  padding: 1rem 6rem;
+  padding: 1rem 1.5rem;
   border: 1px solid #e2e8f0;
   border-radius: 0.25rem;
   background: #fff;
-  height: 250px;
+  height: 180px;
 }
 .modal__title {
   margin: 0 2rem 0 0;
@@ -52,6 +52,13 @@ defineProps({
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  :deep(.modal-content) {
+    padding: 1rem 6rem;
+    height: 250px;
+  }
 }
 </style>
 

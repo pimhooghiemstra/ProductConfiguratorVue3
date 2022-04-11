@@ -88,8 +88,7 @@ const removeProduct = () => emit('remove-product', props.product.id)
 
     .product-form {
         display: grid;
-        grid-gap: 25px;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
 
         .reset-link {
             background: none;
@@ -103,6 +102,15 @@ const removeProduct = () => emit('remove-product', props.product.id)
                 outline: none;
                 color: #cc7a00;
             }
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .single-product {
+        .product-form {
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 25px;
         }
     }
 }

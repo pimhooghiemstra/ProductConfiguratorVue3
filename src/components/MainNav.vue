@@ -24,7 +24,7 @@ const { i18n, lang } = storeToRefs(i18nStore)
                     </div>
                 </form>
             </li>
-            <li><i class="fa fa-undo"></i> <a href="https://plint-demos.nl">{{ lang['backToListButton'] }}</a></li>
+            <li>&#8618; <a href="https://plint-demos.nl">{{ lang['backToListButton'] }}</a></li>
         </ul>
     </nav>
 </template>
@@ -46,7 +46,7 @@ const { i18n, lang } = storeToRefs(i18nStore)
         padding: 10px;
         margin-bottom: 0;
         display: grid;
-        grid-template-columns: 120px 70px 1fr;
+        grid-template-columns: 130px 70px 1fr;
         place-items: center;
 
         li, li > a {
@@ -99,7 +99,7 @@ div.language-input {
 	input[type=radio] ~ label:before {
 	    display: inline-block;
 	    position: relative;
-	    top: 7px;
+	    top: 4px;
         opacity: 0.3;
 	}
 

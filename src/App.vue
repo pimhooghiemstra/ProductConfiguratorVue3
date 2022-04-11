@@ -19,7 +19,7 @@ import PostCardConfigurator from './components/configurator/PostCardConfigurator
   margin-right: auto;
   margin-left: auto;
 
-  width: 750px;
+  width: 100%;
 }
 
 .btn {
@@ -42,6 +42,12 @@ import PostCardConfigurator from './components/configurator/PostCardConfigurator
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 730px;
+  }
 }
 
 @media (min-width: 992px) {
