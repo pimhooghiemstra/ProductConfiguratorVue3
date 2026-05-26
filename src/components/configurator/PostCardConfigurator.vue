@@ -59,7 +59,7 @@ const handleSubmit = () => showModal.value = true
                 <ProceedToCheckoutButton @clicked="handleSubmit"/>
             </footer>
 
-            <CheckoutModal :showModal="showModal"/>
+            <CheckoutModal :showModal="showModal" @close="showModal = false"/>
         </div>
     </div>
 </template>

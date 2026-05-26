@@ -1,19 +1,31 @@
 <script setup>
-import { $vfm, VueFinalModal, ModalsContainer } from 'vue-final-modal'
-
+import { VueFinalModal } from 'vue-final-modal'
+import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18nStore } from '../../stores/i18n';
 const i18nStore = useI18nStore()
 const { lang } = storeToRefs(i18nStore)
 
-defineProps({
+const emit = defineEmits(['close'])
+const props = defineProps({
     showModal: Boolean
+})
+
+const show = ref(props.showModal)
+const close = () => {
+    show.value = false
+    emit('close')
+}
+
+// add watcher to update show when props.showModal changes
+watch(() => props.showModal, (newVal) => {
+    show.value = newVal
 })
 </script>
 
 <template>
-    <vue-final-modal v-model="showModal" classes="modal-container" content-class="modal-content">
-        <button class="close-button modal__close" @click="showModal = false">
+    <vue-final-modal v-model="show" classes="modal-container" content-class="modal-content">
+        <button class="close-button modal__close" @click="close">
             &times;
         </button>
         <div>
@@ -41,6 +53,10 @@ defineProps({
   border-radius: 0.25rem;
   background: #fff;
   height: 180px;
+
+  p {
+    color: black;
+  }
 }
 .modal__title {
   margin: 0 2rem 0 0;
